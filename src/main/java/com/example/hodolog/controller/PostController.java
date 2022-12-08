@@ -7,6 +7,7 @@ import com.example.hodolog.request.PostEdit;
 import com.example.hodolog.request.PostSearch;
 import com.example.hodolog.response.PostResponse;
 import com.example.hodolog.service.PostService;
+import com.example.hodolog.vo.ResponseVo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
@@ -25,6 +26,9 @@ import org.springframework.web.client.DefaultResponseErrorHandler;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.net.URI;
@@ -106,7 +110,23 @@ public class PostController {
 
 
     @PostMapping("/login")
-    public void login() throws Exception {
-        postService.login();
+    public ResponseEntity<String> login(HttpServletResponse response) throws Exception {
+        ResponseEntity<String> responseVo = postService.login();
+
+//        // 쿠키 생성
+//        Cookie mySessionCookie = new Cookie(SESSION_COOKIE_NAME, responseVo.getBody().getKR_JSESSIONID());
+//        response.addCookie(mySessionCookie);
+        log.debug("responseVo: {}", responseVo.toString());
+        log.debug("responseVo1: {}", responseVo.getHeaders());
+
+//        String sessionid = request.getSession().getId();
+//        log.debug("sessionid: {}", sessionid);
+//        response.setHeader("SET-COOKIE", "JSESSIONID_XEBEC=" + sessionid + "; secure");
+        return responseVo;
+    }
+
+    @PostMapping("/reserve")
+    public void reserve(HttpServletRequest request) throws Exception {
+        postService.reserve();
     }
 }
