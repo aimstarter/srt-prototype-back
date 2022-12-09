@@ -127,6 +127,6 @@ public class PostController {
 
     @PostMapping("/reserve")
     public void reserve(HttpServletRequest request) throws Exception {
-        postService.reserve();
+        postService.reserve(request);
     }
 }

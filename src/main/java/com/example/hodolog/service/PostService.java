@@ -174,7 +174,6 @@ public class PostService {
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
         headers.setAccept(Arrays.asList(new MediaType[]{MediaType.APPLICATION_JSON}));
         headers.set("User-Agent", "Mozilla/5.0 (Linux; Android 5.1.1; LGM-V300K Build/N2G47H) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/39.0.0.0 Mobile Safari/537.36SRT-APP-Android V.1.0.6");
-
         MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
         map.add("auto", "Y");
         map.add("check", "Y");
@@ -197,7 +196,7 @@ public class PostService {
         return response;
     }
 
-    public void reserve() {
+    public void reserve(HttpServletRequest request1) {
         StringBuilder sb = new StringBuilder();
 
         URI uri = UriComponentsBuilder
@@ -275,6 +274,8 @@ public class PostService {
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
         headers.setAccept(Arrays.asList(new MediaType[]{MediaType.APPLICATION_JSON}));
         headers.set("User-Agent", "Mozilla/5.0 (Linux; Android 5.1.1; LGM-V300K Build/N2G47H) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/39.0.0.0 Mobile Safari/537.36SRT-APP-Android V.1.0.6");
+        headers.add("Cookie", request1.getHeader("Cookie"));
+        log.debug("cookie: {}", request1.getHeader("Cookie"));
 
         MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
         map.add("reserveType", "11");
@@ -285,9 +286,9 @@ public class PostService {
         map.add("stndFlg", "N");
         map.add("trnGpCd1", "300");
         map.add("stlbTrnClsfCd1", "11");
-        map.add("dptDt1", "20221212");
+        map.add("dptDt1", "20221215");
         map.add("dptTm1", "123400");
-        map.add("runDt1", "20221212");
+        map.add("runDt1", "20221215");
         map.add("trnNo1", "00330");
         map.add("dptRsStnCd1", "0509");
         map.add("dptRsStnCdNm1", "울산(통도사)");
