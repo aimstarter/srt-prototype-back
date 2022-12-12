@@ -109,7 +109,7 @@ public class PostController {
     }
 
 
-    @PostMapping("/login")
+    @PostMapping("/api/login")
     public ResponseEntity<String> login(HttpServletResponse response) throws Exception {
         ResponseEntity<String> responseVo = postService.login();
 
@@ -125,7 +125,7 @@ public class PostController {
         return responseVo;
     }
 
-    @PostMapping("/reserve")
+    @PostMapping("/api/reserve")
     public void reserve(HttpServletRequest request) throws Exception {
         postService.reserve(request);
     }
